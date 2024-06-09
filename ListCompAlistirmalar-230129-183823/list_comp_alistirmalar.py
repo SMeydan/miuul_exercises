@@ -33,8 +33,17 @@ df = sns.load_dataset("car_crashes")
 df.columns
 df.info()
 
+# ###############################################
+# # CEVAP 1: List Comprehension yapısı kullanarak car_crashes verisindeki numeric değişkenlerin isimlerini büyük harfe çeviriniz ve başına NUM ekleyiniz.
+# ###############################################
 
+[print("NUM_" + column.upper()) if df[column].dtype == 'float64' else print(column.upper()) for column in df.columns]
 
+for column in df.columns:
+    if df[column].dtype == 'float64':
+        print("NUM_" + column.upper())
+    else:
+        print(column.upper())
 
 # ###############################################
 # # GÖREV 2: List Comprehension yapısı kullanarak car_crashes verisindeki isminde "no" barındırmayan değişkenlerin isimlerininin sonuna "FLAG" yazınız.
@@ -54,6 +63,18 @@ df.info()
 # #  'INS_PREMIUM_FLAG',
 # #  'INS_LOSSES_FLAG',
 # #  'ABBREV_FLAG']
+
+# ###############################################
+# # CEVAP 2: List Comprehension yapısı kullanarak car_crashes verisindeki isminde "no" barındırmayan değişkenlerin isimlerininin sonuna "FLAG" yazınız.
+# ###############################################
+
+[print(column.upper() + "_FLAG") if "no" not in column else print(column.upper()) for column in df.columns]
+
+for column in df.columns:
+    if "no" not in column:
+        print(column.upper() + "_FLAG")
+    else:
+        print(column.upper())
 
 
 
@@ -77,9 +98,11 @@ og_list = ["abbrev", "no_previous"]
 # # 4 12.000     4.200    3.360          10.920      878.410     165.630
 #
 
+# ###############################################
+# # CEVAP 3: List Comprehension yapısı kullanarak aşağıda verilen değişken isimlerinden FARKLI olan değişkenlerin isimlerini seçiniz ve yeni bir dataframe oluşturunuz.
+# ###############################################
 
-
-
-
-
+new_columns = [column for column in df.columns if column not in og_list]
+new_df = df[new_columns]
+print(new_df)
 
